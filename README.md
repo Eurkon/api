@@ -12,5 +12,4 @@
 
 | 功能 | 请求地址 | 返回格式 | 请求示例 |
 | --- | --- | --- | --- |
-
 | 随机壁纸 | https://api.btstu.cn/sjbz/api.php | json/images | https://api.btstu.cn/sjbz/api.php?lx=dongman&format=images
