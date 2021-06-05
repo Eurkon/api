@@ -19,12 +19,12 @@ class handler(BaseHTTPRequestHandler):
             del params['api']
             data = eval("{0}".format(api))(params)
         except Exception as e:
-            data = json.dumps({'error': str(e)})
+            data = {'error': str(e)}
 
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Cache-Control', 'no-cache')
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        self.wfile.write(data)
+        self.wfile.write(json.dumps(data).encode('utf-8'))
         return
