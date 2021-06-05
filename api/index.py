@@ -3,7 +3,8 @@
 # @Date : 2021/6/3 16:55
 
 import json
-from urllib.parse import parse_qs
+from urllib import parse
+from urllib.parse import urlparse
 from http.server import BaseHTTPRequestHandler
 
 from api.weibo.api import *
@@ -12,9 +13,8 @@ from api.weibo.api import *
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-
         try:
-            params = parse_qs(self.path.split('?')[1])
+            params = dict(parse.parse_qsl(urlparse(self.path).query))
             api = params['api']
             del params['api']
             data = eval("{0}".format(api))(params)
