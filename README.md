@@ -1,6 +1,6 @@
 ## 前言
 
-由于 Vercel 搭建 API 的限制，为了实现根据业务请求返回不同的数据，需要以参数的形式调用不同的方法，如 `域名/api?api=weibo_top` 表示请求 `weibo_top` 方法
+由于 Vercel 搭建 API 的限制，为了实现根据业务请求返回不同的数据，需要以参数的形式调用不同的方法，如 `域名/api?api=weibo_top` 表示请求 `weibo/api/weibo_top` 方法
 
 **请求示例**
   - 无其他参数：`https://api.eurkon.vercel.app/api?api=weibo_top`
