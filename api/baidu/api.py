@@ -2,6 +2,7 @@
 # @Author    : Eurkon
 # @Date      : 2021/6/5 10:19
 
+import json
 import requests
 
 
@@ -17,4 +18,5 @@ def baidu_tongji(params):
     url = 'https://openapi.baidu.com/rest/2.0/tongji/report/getData?'
     req = requests.post(url=url, data=params)
     data = req.json()
-    return data
+
+    return json.dumps(data).encode('utf-8')

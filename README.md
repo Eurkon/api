@@ -1,7 +1,15 @@
+## 前言
+
+由于 Vercel 搭建 API 的限制，为了实现根据业务请求返回不同的数据，需要以参数的形式调用不同的方法，如 `域名/api?api=weibo_top` 表示请求 `weibo_top` 方法
+
+**请求示例**
+  - 无其他参数：`https://api.eurkon.vercel.app/api?api=weibo_top`
+  - 有其他参数：`https://api.eurkon.vercel.app/api?api=weibo_top&p1=v1&p2=v2...` 其中 `&p1=v1&p2=v2...` 为其他参数。
+
 ## 自建 API
 
-| 模块 | 功能 | 请求地址 | 请求参数 | 返回格式 |
-| --- | --- | --- | --- |
+| 模块 | 功能 | 请求地址 | 其他参数 | 返回格式 |
+| --- | --- | --- | --- | --- |
 | `/baidu/api` | 重定向请求百度统计网站，解决跨域问题 | `域名/api?api=baidu_tongji` | 与百度统计请求参数一致 | JSON |
 | `/weibo/api` | 爬取微博热搜 | `域名/api?api=weibo_top` | 无 | JSON |
 
@@ -10,14 +18,12 @@
 | 功能 | 请求地址 | 返回格式 |
 | --- | --- | --- |
 | 根据月份 `month`（如 01）返回百度百科某个月份的历史今日 | `https://baike.baidu.com`<br>`/cms/home/eventsOnHistory/`month`.json` | JSON | 
-| 返回 ip、行政区编码、地址 | `https://pv.sohu.com`<br>`/cityjson?ie=utf-8` | JavaScript |
+| 返回 ip、行政区编码、地址 | `https://pv.sohu.com`<br>`/cityjson?ie=utf-8` | Text |
 | 根据 `ip` 返回地址拼音、国家、天气、温度、湿度| `https://wttr.in`<br>`/`ip`?format="%l+\\+%c+\\+%t+\\+%h"` | Text |
 
 ## 常用 API 网站
 
-## 常用 API 网站
-
-- [博天 API](https://api.btstu.cn/)
+- **[博天 API](https://api.btstu.cn/)**
   - **随机壁纸**：随机输出各类壁纸
   - **毒鸡汤**：随机输出毒鸡汤
   - **随机头像**：随机输出各类头像
