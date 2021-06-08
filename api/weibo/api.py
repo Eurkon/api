@@ -13,12 +13,12 @@ def weibo_top(params):
     Args:
 
     Returns:
-        微博热搜 json {title：标题, url：地址, num：数值, hot：等级}
+        微博热搜 json {title: 标题, url: 地址, num: 数值, hot: 等级}
     """
 
     data = []
-    r = requests.get('https://s.weibo.com/top/summary/')
-    soup = BeautifulSoup(r.text, 'html.parser')
+    response = requests.get('https://s.weibo.com/top/summary/')
+    soup = BeautifulSoup(response.text, 'html.parser')
     url = soup.select('#pl_top_realtimehot > table > tbody > tr > td.td-02 > a')
     num = soup.select('#pl_top_realtimehot > table > tbody > tr > td.td-02 > span')
     hot = soup.select('#pl_top_realtimehot > table > tbody > tr > td.td-03')
