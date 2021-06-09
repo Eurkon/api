@@ -2,13 +2,12 @@
 # @Author : Eurkon
 # @Date : 2021/6/3 16:55
 
-import json
 from urllib import parse
 from urllib.parse import urlparse
 from http.server import BaseHTTPRequestHandler
 
-from api.baidu.api import *
-from api.weibo.api import *
+from api.baidu.api.api import *
+from api.weibo.api.api import *
 
 
 class handler(BaseHTTPRequestHandler):
