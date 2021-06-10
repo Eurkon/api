@@ -6,38 +6,87 @@
   - 无其他参数：`https://api.eurkon.vercel.app/api?api=weibo_top`
   - 有其他参数：`https://api.eurkon.vercel.app/api?api=weibo_top&p1=v1&p2=v2...` 其中 `&p1=v1&p2=v2...` 为其他参数。
 
+
 ## 自建 API
 
-| 模块 | 功能 | 请求地址 | 其他参数 | 返回格式 |
-| --- | --- | --- | --- | --- |
-| `/baidu/api` | 重定向请求百度统计网站，解决跨域问题 | `域名/api?api=baidu_tongji` | 百度统计请求参数 | JSON |
-| `/weibo/api` | 爬取微博热搜 | `域名/api?api=weibo_top` | 无 | JSON |
+### 百度
+#### 百度统计
+  - 文件路径：/baidu/api/tonji
+  - 请求地址：`域名/api?api=baidu_tongji`
+  - 其他参数：百度统计请求参数
+  - 返回格式：JSON
+  - 请求示例：
+
+### 谷歌
+
+#### 谷歌翻译
+  - 文件路径：/google/api/translate
+  - 请求地址：`域名/api?api=google_translate`
+  - 其他参数：
+    - from【必填】：源语言
+    - to【必填】：翻译语言
+    - content【必填】：翻译内容，长度不超过 4891
+  - 返回格式：JSON
+  - 请求示例：https://api.eurkon.vercel.app/api?api=google_translate&from=英语&to=中文&content=helloworld
+
+### 微博
+
+#### 爬取微博热搜
+  - 文件路径：/weibo/api/top
+  - 请求地址：`域名/api?api=weibo_top`
+  - 其他参数：无
+  - 返回格式：JSON
+  - 请求示例：https://api.eurkon.vercel.app/api?api=weibo_top
+
+### 模块
+
+#### 功能
+  - 文件路径：
+  - 请求地址：`域名/api?api=`
+  - 其他参数：
+  - 返回格式：
+  - 请求示例：
 
 ## 常用 API
 
 ### 百度百科历史今日
   - 请求地址：`https://baike.baidu.com/cms/home/eventsOnHistory/`month`.json`
-  - 请求参数：month（必填）
+  - 请求参数：month【必填】
   - 返回格式：JSON
   - 请求示例：https://baike.baidu.com/cms/home/eventsOnHistory/01.json
 
-### ip、行政区编码、地址
+### IP、行政区编码、地址
   - 请求地址：`https://pv.sohu.com/cityjson?ie=utf-8`
   - 请求参数：无
   - 返回格式：JSON
   - 请求示例：https://pv.sohu.com/cityjson?ie=utf-8
 
-### 地址拼音、国家、天气、温度、湿度
+### 地区、国家、天气、温度、湿度
   - 请求地址：`https://wttr.in/`ip`?format="%l+\\+%c+\\+%t+\\+%h"`
-  - 请求参数：ip（可填）
+  - 请求参数：ip【可填】
   - 返回格式：Text
   - 请求示例：https://wttr.in/?format="%l+\\+%c+\\+%t+\\+%h"
 
 ### 腾讯天气接口
   - 请求地址：`https://wis.qq.com/weather/common?source=xw&weather_type=forecast_1h|forecast_24h|index|alarm|limit|tips&province=`province`&city=`city`&county=`county
-  - 请求参数：province（必填）、city（必填）、county（选填）
+  - 请求参数：
+    - province【必填】：省份
+    - city【必填】：城市
+    - county【选填】：地区
   - 返回格式：JSON
   - 请求示例：https://wis.qq.com/weather/common?source=xw&weather_type=forecast_1h|forecast_24h|index|alarm|limit|tips&province=广东&city=广州&county=天河
+
+### 豆瓣电影接口
+  - 请求地址：`https://movie.douban.com/j/search_subjects?`
+  - 请求参数：
+    - tag【必填】：标签
+    - type【选填】：类型
+    - sort【选填】：排序
+    - page_limit【选填】：返回个数
+    - page_start【选填】：开始索引
+  - 返回格式：JSON
+  - 请求示例：https://movie.douban.com/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=20&page_start=0
+  - 备注信息：参考链接填写参数 https://movie.douban.com/explore#!type=movie&tag=热门&sort=recommend&page_limit=20&page_start=0
 
 ### API
   - 请求地址：
