@@ -79,7 +79,7 @@ def read_lang(lang):
 
 def from_to(sl, tl, content, tk):
     if len(content) > 4891:
-        return {'error': '内容超过翻译长度'}
+        return {'error': '内容过长'}
     else:
         url = "http://translate.google.cn/translate_a/single?client=t" \
               "&sl={}&tl={}&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca" \
