@@ -2,4 +2,4 @@
 # @Author : Eurkon
 # @Date : 2021/6/9 17:13
 
-from api.weibo.api.top import *
+from api.weibo.api.top import weibo_top

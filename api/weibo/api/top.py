@@ -37,3 +37,7 @@ def weibo_top(params):
             data.append(news)
 
     return json.dumps(data).encode('utf-8')
+
+
+if __name__ == '__main__':
+    print(weibo_top({}))

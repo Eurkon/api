@@ -2,12 +2,14 @@
 # @Author : Eurkon
 # @Date : 2021/6/3 16:55
 
+import json
 from urllib import parse
 from urllib.parse import urlparse
 from http.server import BaseHTTPRequestHandler
 
 from api.baidu.api.api import *
 from api.weibo.api.api import *
+from api.google.api.api import *
 
 
 class handler(BaseHTTPRequestHandler):
@@ -27,3 +29,6 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
         return
+
+if __name__ == '__main__':
+    print(google_translate({'from': '英语', 'to': '中文', 'content': 'Hello World'}))
