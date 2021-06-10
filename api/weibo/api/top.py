@@ -8,14 +8,14 @@ from bs4 import BeautifulSoup
 
 
 def weibo_top(params):
-    """爬取微博热搜
+    """微博热搜
 
     Args:
+        params (dict): {}
 
     Returns:
-        微博热搜 json {title: 标题, url: 地址, num: 数值, hot: 等级}
+        json: {title: 标题, url: 地址, num: 热度数值, hot: 热搜等级}
     """
-
     data = []
     response = requests.get('https://s.weibo.com/top/summary/')
     soup = BeautifulSoup(response.text, 'html.parser')

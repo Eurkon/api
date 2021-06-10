@@ -101,6 +101,14 @@ def from_to(sl, tl, content, tk):
 
 
 def google_translate(params):
+    """谷歌翻译
+
+    Args:
+        params (dict): {from: 源语言, to: 翻译语言, content: 翻译内容}
+
+    Returns:
+        json: {result: 翻译后的内容}
+    """
     js = Py4Js()
     tk = js.get_tk(params['content'])
     return json.dumps(from_to(read_lang(params['from']), read_lang(params['to']), params['content'], tk)).encode(
