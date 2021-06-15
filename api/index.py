@@ -31,7 +31,7 @@ class handler(BaseHTTPRequestHandler):
                 self.send_header('Content-type', 'application/json')
 
             elif isinstance(data, str):
-                self.send_response(301)
+                self.send_response(302)
                 self.send_header('Location', data)
                 if data.endswith('.png'):
                     self.send_header('Content-type', 'image/png')
