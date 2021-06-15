@@ -6,12 +6,11 @@
   - 无其他参数：`https://api.eurkon.vercel.app/api?api=weibo_top`
   - 有其他参数：`https://api.eurkon.vercel.app/api?api=weibo_top&p1=v1&p2=v2...` 其中 `&p1=v1&p2=v2...` 为其他参数。
 
-
 ## 自建 API
 
 ### 百度
 #### 百度统计
-  - 文件路径：/baidu/api/tonji
+  - 文件路径：`/baidu/api/Tongji`
   - 请求地址：`域名/api?api=baidu_tongji`
   - 其他参数：百度统计请求参数
   - 返回格式：JSON
@@ -20,7 +19,7 @@
 ### 谷歌
 
 #### 谷歌翻译
-  - 文件路径：/google/api/translate
+  - 文件路径：`/google/api/Translate`
   - 请求地址：`域名/api?api=google_translate`
   - 其他参数：
     - from【必填】：源语言
@@ -32,11 +31,20 @@
 ### 微博
 
 #### 爬取微博热搜
-  - 文件路径：/weibo/api/top
+  - 文件路径：`/weibo/api/Top`
   - 请求地址：`域名/api?api=weibo_top`
   - 其他参数：无
   - 返回格式：JSON
   - 请求示例：https://api.eurkon.vercel.app/api?api=weibo_top
+
+### 工具
+
+#### 生成二维码
+  - 文件路径：`/tools/api/QRCode`
+  - 请求地址：`域名/api?api=tools_qrcode`
+  - 其他参数：content【必填】：二维码内容
+  - 返回格式：PNG
+  - 请求示例：https://api.eurkon.vercel.app/api?api=tools_qrcode&content=https://blog.eurkon.com/
 
 ### 模块
 
