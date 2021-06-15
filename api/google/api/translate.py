@@ -110,9 +110,8 @@ def google_translate(params):
         json: {result: 翻译后的内容}
     """
     js = Py4Js()
-    tk = js.get_tk(params['content'])
-    return json.dumps(from_to(read_lang(params['from']), read_lang(params['to']), params['content'], tk)).encode(
-        'utf-8')
+    tk = js.get_tk(str(params['content']))
+    return from_to(read_lang(params['from']), read_lang(params['to']), params['content'], tk)
 
 
 if __name__ == '__main__':

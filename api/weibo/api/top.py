@@ -36,7 +36,7 @@ def weibo_top(params):
         if hotness != '荐':
             data.append(news)
 
-    return json.dumps(data).encode('utf-8')
+    return data
 
 
 if __name__ == '__main__':

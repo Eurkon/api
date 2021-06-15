@@ -2,4 +2,4 @@
 # @Author : Eurkon
 # @Date : 2021/6/15 9:44
 
-from api.tools.api.qrcode import tool_qrcode
+from api.tools.api.QRCode import tools_qrcode

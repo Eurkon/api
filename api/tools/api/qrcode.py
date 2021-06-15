@@ -17,7 +17,7 @@ def tools_qrcode(params):
     Returns:
         bytes: 字节流
     """
-    img = qrcode.make(params['content'])
+    img = qrcode.make(str(params['content']))
     # 创建一个字节流管道
     img_bytes = io.BytesIO()
     # 将图片数据存入字节流管道， format可以按照具体文件的格式填写

@@ -19,4 +19,4 @@ def baidu_tongji(params):
     req = requests.post(url=url, data=params)
     data = req.json()
 
-    return json.dumps(data).encode('utf-8')
+    return data
