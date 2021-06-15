@@ -10,7 +10,7 @@
 
 ### 百度
 #### 百度统计
-  - 文件路径：`/baidu/api/Tongji`
+  - 文件路径：`/baidu/api/tongji`
   - 请求地址：`域名/api?api=baidu_tongji`
   - 其他参数：百度统计请求参数
   - 返回格式：JSON
@@ -19,7 +19,7 @@
 ### 谷歌
 
 #### 谷歌翻译
-  - 文件路径：`/google/api/Translate`
+  - 文件路径：`/google/api/translate`
   - 请求地址：`域名/api?api=google_translate`
   - 其他参数：
     - from【必填】：源语言
@@ -31,7 +31,7 @@
 ### 微博
 
 #### 爬取微博热搜
-  - 文件路径：`/weibo/api/Top`
+  - 文件路径：`/weibo/api/top`
   - 请求地址：`域名/api?api=weibo_top`
   - 其他参数：无
   - 返回格式：JSON

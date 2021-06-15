@@ -4,8 +4,6 @@
 
 import io
 import os
-from MyQR import myqr
-import qrcode
 
 
 def tools_qrcode(params):
@@ -17,6 +15,8 @@ def tools_qrcode(params):
     Returns:
         bytes: 字节流
     """
+    import qrcode
+
     img = qrcode.make(str(params['content']))
     # 创建一个字节流管道
     img_bytes = io.BytesIO()
@@ -36,6 +36,7 @@ def tools_qrcode_color(params):
     Returns:
         str: 图片地址
     """
+    from MyQR import myqr
 
     words = params['words']
     name = 'qrcode.png'
