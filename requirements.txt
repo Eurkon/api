@@ -1,3 +1,5 @@
 requests==2.22.0
 beautifulsoup4==4.10.0
 MyQR==2.3.1
+PyExecJS==1.5.1
+qrcode==6.1
