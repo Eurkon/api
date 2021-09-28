@@ -8,7 +8,7 @@ import requests
 from http.server import BaseHTTPRequestHandler
 
 
-def get_data():
+def weibo_top():
     """微博热搜
 
     Args:
