@@ -2,11 +2,13 @@
 # @Author    : Eurkon
 # @Date      : 2021/6/5 10:16
 
+import json
+import time
 import requests
-from bs4 import BeautifulSoup
+from http.server import BaseHTTPRequestHandler
 
 
-def weibo_top(params):
+def get_data():
     """微博热搜
 
     Args:
@@ -15,12 +17,16 @@ def weibo_top(params):
     Returns:
         json: {title: 标题, url: 地址, num: 热度数值, hot: 热搜等级}
     """
+
     data = []
-    response = requests.get('https://s.weibo.com/top/summary/')
-    soup = BeautifulSoup(response.text, 'html.parser')
-    url = soup.select('#pl_top_realtimehot > table > tbody > tr > td.td-02 > a')
-    num = soup.select('#pl_top_realtimehot > table > tbody > tr > td.td-02 > span')
-    hot = soup.select('#pl_top_realtimehot > table > tbody > tr > td.td-03')
+    t = time.time()
+    timestamp = str(round(t * 10000))
+    url = 'https://s.weibo.com/ajax/jsonp/gettopsug?_cb=STK_' + timestamp
+    response = requests.get(url)
+    # 返回js
+    data_str = response.text.replace(')}catch(e){}', ''). \
+        replace('try{window.STK_' + timestamp + '&STK_' + timestamp + '(', '')
+    data_dict = json.loads(data_str)
     jyzy = {
         '电影': '影',
         '剧集': '剧',
@@ -28,23 +34,26 @@ def weibo_top(params):
         '音乐': '音'
     }
 
-    for i in range(1, len(url)):
-        # 去除广告链接
-        num_string = num[i - 1].get_text().strip()
-        print(url[i].get_text().strip())
-        if num_string != '':
-            num_split = num_string.split(' ')
-            dic = {
-                'title': url[i].get_text().strip(),
-                'url': "https://s.weibo.com" + url[i]['href'].strip(),
-                'num': num_split[len(num_split) - 1],
-                'hot': hot[i].get_text().replace('<i class="icon-txt icon-txt-', '') \
-                    .replace('</i>', '').replace('">', '') \
-                    .replace('new', '').replace('hot', '').replace('boil', '').replace('boom', '').strip()
-            }
-            if len(num_split) > 1:
-                dic['hot'] = jyzy[num_split[0]] if num_split[0] in jyzy.keys() else ''
-            data.append(dic)
+    for data_item in data_dict['data']['list']:
+        hot = ''
+        if 'flag_desc' in data_item:
+            hot = jyzy.get(data_item['flag_desc'])
+        if 'is_boom' in data_item:
+            hot = '爆'
+        if 'is_hot' in data_item:
+            hot = '热'
+        if 'is_boil' in data_item:
+            hot = '沸'
+        if 'is_new' in data_item:
+            hot = '新'
+
+        dic = {
+            'title': data_item['note'],
+            'url': 'https://s.weibo.com/weibo?q=' + data_item['word'].replace('#', '%23') + '&Refer=top',
+            'num': data_item['num'],
+            'hot': hot
+        }
+        data.append(dic)
 
     return data
 
