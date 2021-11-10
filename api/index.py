@@ -11,6 +11,7 @@ from api.baidu.api.api import *
 from api.google.api.api import *
 from api.tools.api.api import *
 from api.weibo.api.api import *
+from api.youdao.api.api import *
 
 
 class handler(BaseHTTPRequestHandler):
