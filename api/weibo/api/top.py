@@ -5,7 +5,6 @@
 import json
 import time
 import requests
-from http.server import BaseHTTPRequestHandler
 
 
 def weibo_top(params):
