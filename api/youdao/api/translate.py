@@ -28,18 +28,6 @@ headers = {
 }
 
 
-def r(word):
-    bv = md5(appVersion.encode()).hexdigest()
-    ts = str(int(time.time() * 1000))
-    salt = ts + str(random.randint(0, 9))
-    return {
-        "ts": ts,
-        "bv": bv,
-        "salt": salt,
-        "sign": md5(("fanyideskweb" + word + salt + "]BjuETDhU)zqSxf-=B#7m").encode()).hexdigest()
-    }
-
-
 def youdao_translate(content):
     """有道翻译
 
@@ -50,21 +38,24 @@ def youdao_translate(content):
         json: {result: 翻译后的内容}
     """
     word = content['content']
-    data = r(word)
+    bv = md5(appVersion.encode()).hexdigest()
+    lts = str(int(time.time() * 1000))
+    salt = lts + str(random.randint(0, 9))
+    sign = md5(("fanyideskweb" + word + salt + "]BjuETDhU)zqSxf-=B#7m").encode()).hexdigest()
     params = {
         "i": word,
         "from": "AUTO",
         "to": "AUTO",
         "smartresult": "dict",
         "client": "fanyideskweb",
-        "salt": data["salt"],
-        "sign": data["sign"],
-        "lts": data["ts"],
-        "bv": data["bv"],
+        "salt": salt,
+        "sign": sign,
+        "lts": lts,
+        "bv": bv,
         "doctype": "json",
         "version": "2.1",
         "keyfrom": "fanyi.web",
-        "action": "FY_BY_REALTlME",
+        "action": "FY_BY_REALTlME"
     }
 
     response = requests.post(url=url, headers=headers, data=params)
