@@ -48,9 +48,8 @@ def baidu_translate(params):
     # 多次请求保证获取 token，并用此 token 进行翻译
     session = requests.Session()
     session.headers = headers
-
-    session.get(url='https://fanyi.baidu.com/', headers=headers)
-    html = session.get(url='https://fanyi.baidu.com/', headers=headers).text
+    session.get(url='https://fanyi.baidu.com/')
+    html = session.get(url='https://fanyi.baidu.com/').text
     token = re.findall(r"token: '(.*?)'", html)[0]
     gtk = re.findall(r"window.gtk = '(.*?)';", html)[0]
 
@@ -70,7 +69,7 @@ def baidu_translate(params):
         'domain': 'common'
     }
 
-    response = session.get(url=url, headers=headers, params=params)
+    response = session.get(url=url, params=params)
     message = response.json()
     return {'result': message['trans_result']['data'][0]['dst']}
 
