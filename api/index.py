@@ -14,7 +14,7 @@ from api.weibo.api.api import *
 from api.youdao.api.api import *
 
 
-class handler(BaseHTTPRequestHandler):
+class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         try:
             params = dict(parse.parse_qsl(urlparse(self.path).query))

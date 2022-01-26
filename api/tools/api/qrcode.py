@@ -68,5 +68,3 @@ if __name__ == '__main__':
     # 'picture': '../img/background.gif',
     # 'colorized': True}))
     print(tools_qrcode({'content': 'https://blog.eurkon.com/'}))
-
-
