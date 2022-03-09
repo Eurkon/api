@@ -20,11 +20,5 @@
       "src": "/openapi.json",
       "dest": "api/main.py"
     }
-  ],
-  "functions": {
-    "api/main.py": {
-      "memory": 1024,
-      "maxDuration": 5
-    }
-  }
+  ]
 }
