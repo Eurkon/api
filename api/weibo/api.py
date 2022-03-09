@@ -2,11 +2,10 @@
 # @Author    : Eurkon
 # @Date      : 2021/6/5 10:16
 
-import json
 import requests
 
 
-def weibo_top():
+def top():
     """微博热搜
 
     Args:
@@ -50,7 +49,3 @@ def weibo_top():
         data.append(dic)
 
     return data
-
-
-if __name__ == '__main__':
-    print(weibo_top())

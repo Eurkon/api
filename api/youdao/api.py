@@ -7,28 +7,8 @@ from hashlib import md5
 import time
 import random
 
-# 请求地址
-url = 'http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule'
 
-appVersion = '5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36'
-
-headers = {
-    'Accept': 'application/json, text/javascript, */*; q=0.01',
-    'Accept-Encoding': 'gzip, deflate',
-    'Accept-Language': 'zh-CN,zh;q=0.9',
-    'Connection': 'keep-alive',
-    'Content-Length': '244',
-    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'Cookie': 'OUTFOX_SEARCH_USER_ID=-1506602845@10.169.0.82; JSESSIONID=aaaUggpd8kfhja1AIJYpx; OUTFOX_SEARCH_USER_ID_NCOO=108436537.92676207; ___rl__test__cookies=1597502296408',
-    'Host': 'fanyi.youdao.com',
-    'Origin': 'http://fanyi.youdao.com',
-    'Referer': 'http://fanyi.youdao.com/',
-    'user-agent': appVersion,
-    'X-Requested-With': 'XMLHttpRequest',
-}
-
-
-def youdao_translate(content: str = 'Hello World'):
+def translate(content: str = 'Hello World'):
     """有道翻译
 
     Args:
@@ -37,6 +17,26 @@ def youdao_translate(content: str = 'Hello World'):
     Returns:
         dict: {result: 翻译后的内容}
     """
+    # 请求地址
+    url = 'http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule'
+
+    appVersion = '5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36'
+
+    headers = {
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'zh-CN,zh;q=0.9',
+        'Connection': 'keep-alive',
+        'Content-Length': '244',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Cookie': 'OUTFOX_SEARCH_USER_ID=-1506602845@10.169.0.82; JSESSIONID=aaaUggpd8kfhja1AIJYpx; OUTFOX_SEARCH_USER_ID_NCOO=108436537.92676207; ___rl__test__cookies=1597502296408',
+        'Host': 'fanyi.youdao.com',
+        'Origin': 'http://fanyi.youdao.com',
+        'Referer': 'http://fanyi.youdao.com/',
+        'user-agent': appVersion,
+        'X-Requested-With': 'XMLHttpRequest',
+    }
+
     word = content
     bv = md5(appVersion.encode()).hexdigest()
     lts = str(int(time.time() * 1000))
@@ -64,4 +64,4 @@ def youdao_translate(content: str = 'Hello World'):
 
 
 if __name__ == '__main__':
-    print(youdao_translate('你好'))
+    print(translate('Hello World'))
