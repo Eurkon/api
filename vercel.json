@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "public": true,
+    "builds": [{ "src": "api/main.py", "use": "@vercel/python" }],
+    "routes": [
+        { "src": "/baidu/translate", "dest": "api/main.py" },
+        { "src": "/baidu/tongji", "dest": "api/main.py" },
+        { "src": "/google/translate", "dest": "api/main.py" },
+        { "src": "/tools/qrcode", "dest": "api/main.py" },
+        { "src": "/weibo/top", "dest": "api/main.py" },
+        { "src": "/youdao/translate", "dest": "api/main.py" },
+        { "src": "/docs", "dest": "api/main.py" },
+        { "src": "/openapi.json", "dest": "api/main.py" }
+    ]
+}

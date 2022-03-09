@@ -29,30 +29,68 @@ lang_dict = {'中文': 'zh-CN', '阿尔巴尼亚语': 'sq', '阿拉伯语': 'ar'
              '印尼巽他': 'su', '印尼语': 'id', '印尼爪哇语': 'jw', '英语': 'en', '约鲁巴语': 'yo', '越南语': 'vi', '中文繁体': 'zh-TW'}
 
 
-def google_translate(params):
+def google_translate(fr: str = '英语', to: str = '中文', content: str = 'Hello World'):
     """谷歌翻译
 
     Args:
-        params (dict): {from: 源语言, to: 翻译语言, content: 翻译内容}
+        fr: 源语言
+        to: 翻译语言
+        content: 翻译内容
 
     Returns:
-        json: {result: 翻译后的内容}
+        dict: {result: 翻译后的内容}
     """
+    js_text = """
+        function TL(a) {
+        var k = "";
+        var b = 406644;
+        var b1 = 3293161072;
+        var jd = ".";
+        var $b = "+-a^+6";
+        var Zb = "+-3^+b+-f";
+        for (var e = [], f = 0, g = 0; g < a.length; g++) {
+            var m = a.charCodeAt(g);
+            128 > m ? e[f++] = m : (2048 > m ? e[f++] = m >> 6 | 192 : (55296 == (m & 64512) && g + 1 < a.length && 56320 == (a.charCodeAt(g + 1) & 64512) ? (m = 65536 + ((m & 1023) << 10) + (a.charCodeAt(++g) & 1023),
+                e[f++] = m >> 18 | 240,
+                e[f++] = m >> 12 & 63 | 128) : e[f++] = m >> 12 | 224,
+                e[f++] = m >> 6 & 63 | 128),
+                e[f++] = m & 63 | 128)
+        }
+        a = b;
+        for (f = 0; f < e.length; f++) a += e[f],
+            a = RL(a, $b);
+        a = RL(a, Zb);
+        a ^= b1 || 0;
+        0 > a && (a = (a & 2147483647) + 2147483648);
+        a %= 1E6;
+        return a.toString() + jd + (a ^ b)
+    };
+    
+    function RL(a, b) {
+        var t = "a";
+        var Yb = "+";
+        for (var c = 0; c < b.length - 2; c += 3) {
+            var d = b.charAt(c + 2),
+                d = d >= t ? d.charCodeAt(0) - 87 : Number(d),
+                d = b.charAt(c + 1) == Yb ? a >>> d : a << d;
+            a = b.charAt(c) == Yb ? a + d & 4294967295 : a ^ d
+        }
+        return a
+    }
+    """
+    # with open('../js/translate.js', 'r', encoding='UTF-8') as file:
+    #     js_text = file.read()
+    # 编译加载js字符串
+    js = execjs.compile(js_text)
+    tk = js.call("TL", content)
 
-    with open('../js/translate.js', 'r', encoding='UTF-8') as file:
-        js_text = file.read()
-        # 编译加载js字符串
-        js = execjs.compile(js_text)
-        tk = js.call("TL", str(params['content']))
-
-    if len(params['content']) > 4891:
+    if len(content) > 4891:
         return {'error': '内容过长'}
     else:
         url = "http://translate.google.cn/translate_a/single?client=t" \
               "&sl={}&tl={}&hl=zh-CN&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca" \
               "&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&clearbtn=1&otf=1&pc=1" \
-              "&srcrom=0&ssel=0&tsel=0&kc=2&tk={}&q={}".format(lang_dict[params['from']], lang_dict[params['to']], tk,
-                                                               params['content'])
+              "&srcrom=0&ssel=0&tsel=0&kc=2&tk={}&q={}".format(lang_dict[fr], lang_dict[to], tk, content)
         headers = {
             'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
             'referer': 'https://translate.google.cn/',
@@ -69,4 +107,4 @@ def google_translate(params):
 
 
 if __name__ == '__main__':
-    print(google_translate({'from': '英语', 'to': '中文', 'content': 'Hello World'}))
+    print(google_translate(fr='英语', to='中文', content='Hello World'))

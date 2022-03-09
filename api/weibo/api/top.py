@@ -6,14 +6,13 @@ import json
 import requests
 
 
-def weibo_top(params):
+def weibo_top():
     """微博热搜
 
     Args:
-        params (dict): {}
 
     Returns:
-        json: {title: 标题, url: 地址, num: 热度数值, hot: 热搜等级}
+        list: [{title: 标题, url: 地址, num: 热度数值, hot: 热搜等级}, ...]
     """
 
     data = []
@@ -54,4 +53,4 @@ def weibo_top(params):
 
 
 if __name__ == '__main__':
-    print(weibo_top({}))
+    print(weibo_top())

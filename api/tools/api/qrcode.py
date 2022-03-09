@@ -4,20 +4,21 @@
 
 import io
 import os
+import qrcode
+from MyQR import myqr
 
 
-def tools_qrcode(params):
+def tools_qrcode(content: str = 'Hello World'):
     """生成二维码
 
     Args:
-        params (dict): {content: 内容}
+        content: 二维码内容
 
     Returns:
         bytes: 字节流
     """
-    import qrcode
 
-    img = qrcode.make(str(params['content']))
+    img = qrcode.make(content)
     # 创建一个字节流管道
     img_bytes = io.BytesIO()
     # 将图片数据存入字节流管道， format可以按照具体文件的格式填写
@@ -27,29 +28,26 @@ def tools_qrcode(params):
     return image_bytes
 
 
-def tools_qrcode_color(params):
+def tools_qrcode_color(words: str = 'Hello World', picture: str = None, colorized: str = False):
     """生成二维码
 
     Args:
-        params (dict): {words: 内容(不能是中文), picture: 背景, colorized: 是否为彩色}
+        words: 内容(不能是中文)
+        picture: 背景
+        colorized: 是否为彩色
 
     Returns:
         str: 图片地址
     """
-    from MyQR import myqr
 
-    words = params['words']
     name = 'qrcode.png'
     path = os.path.dirname(os.path.dirname(__file__)) + '/img/'
-    picture = None
-    colorized = False
 
-    if 'picture' in params:
-        picture = str(params['picture'])
+    if picture:
         if picture[-4:] == '.gif':
             name = 'qrcode.gif'
 
-    if 'colorized' in params and str(params['colorized']).lower() == 'true':
+    if colorized and str(colorized).lower() == 'true':
         colorized = True
 
     myqr.run(
