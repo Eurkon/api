@@ -19,6 +19,7 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, 
                    allow_headers=["*"])
 settings = get_project_settings()
 
+
 @app.get("/baidu/translate", tags=["API"], summary="百度翻译")
 def baidu_translate(fr: str = '英语', to: str = '中文', content: str = 'Hello World'):
     """百度翻译
@@ -60,19 +61,6 @@ def google_translate(fr: str = '英语', to: str = '中文', content: str = 'Hel
         dict: {result: 翻译后的内容}
     """
     return google.google_translate(fr, to, content)
-
-
-@app.get("/tools/qrcode", tags=["API"], summary="微博热搜")
-def tools_qrcode(content: str = 'Hello World'):
-    """生成二维码
-
-    Args:
-        content: 二维码内容
-
-    Returns:
-        bytes: 字节流
-    """
-    return tools.tools_qrcode(content)
 
 
 @app.get("/weibo/top", tags=["API"], summary="微博热搜")
