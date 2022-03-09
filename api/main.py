@@ -3,10 +3,12 @@
 # @Date     : 2022/3/8 14:17
 
 import settings
-from scrapy.utils.project import get_project_settings
+import re
 import uvicorn
+from lxml import etree
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from scrapy.utils.project import get_project_settings
 
 import api.baidu.api as baidu
 import api.google.api as google
@@ -85,6 +87,17 @@ def youdao_translate(content: str = 'Hello World'):
         dict: {result: 翻译后的内容}
     """
     return youdao.translate(content)
+
+
+async def fetch(session, url):
+    async with session.get(url, verify_ssl=False) as response:
+        content = await response.text()
+        if re.match("^\d+", content):
+            return content
+        else:
+            html = etree.HTML(content)
+            content = str(html.xpath("//body//div[@class='BorderGrid-cell']//div[@class='d-flex']/span/text()")[0])
+            return content
 
 
 if __name__ == "__main__":

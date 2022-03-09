@@ -1,6 +1,6 @@
-Scrapy==2.5.1
 requests==2.26.0
 PyExecJS==1.5.1
+lxml==4.6.4
 uvicorn==0.17.5
+Scrapy==2.5.1
 fastapi==0.75.0
-MyQR==2.3.1
