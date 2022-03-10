@@ -34,7 +34,7 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
       "src": "/(.*)",
       "dest": "api/main.py"
