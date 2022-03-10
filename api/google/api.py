@@ -107,4 +107,4 @@ def translate(fr: str = '英语', to: str = '中文', content: str = 'Hello Worl
 
 
 if __name__ == '__main__':
-    print(google_translate(fr='英语', to='中文', content='Hello World'))
+    print(translate(fr='英语', to='中文', content='Hello World'))
