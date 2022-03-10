@@ -1,106 +1,203 @@
 ## 前言
 
-由于 Vercel 搭建 API 的限制，为了实现根据业务请求返回不同的数据，需要以参数的形式调用不同的方法，如 `域名/api?api=weibo_top` 表示请求 `weibo/api/weibo_top` 方法
-
-**请求示例**
-  - 无其他参数：`https://api.eurkon.vercel.app/api?api=weibo_top`
-  - 有其他参数：`https://api.eurkon.vercel.app/api?api=weibo_top&p1=v1&p2=v2...` 其中 `&p1=v1&p2=v2...` 为其他参数。
+本文收集了常用的 API 接口以及自己部署于 Vercel 的 Python API 合集。
 
 ## 自建 API
 
 ### 百度
+
 #### 百度统计
-  - 文件路径：`/baidu/api/tongji`
-  - 请求地址：`域名/api?api=baidu_tongji`
-  - 其他参数：百度统计请求参数
-  - 返回格式：JSON
-  - 请求示例：
+
+**接口地址：** /baidu/tongji
+
+**描述：** 重定向请求百度统计，解决跨域问题
+
+**请求方式：** GET
+
+**请求参数说明：** [百度统计用户手册](https://tongji.baidu.com/api/manual/)
+
+**请求示例：** 无
+
+#### 百度翻译
+
+**接口地址：** /baidu/translate
+
+**描述：** 百度翻译
+
+**请求方式：** GET
+
+**请求参数说明：**
+
+| 字段名 | 字段说明 | 字段类型 | 默认值 | 是否必填 |
+| --- | --- | --- | --- | --- |
+| fr | 源语言 | string | 英语 | 否 |
+| to | 翻译语言 | string | 中文 | 否 |
+| content | 源语言 | string | Hello World | 否 |
+
+**请求示例：** https://api.eurkon.com/baidu/translate?fr=英语&to=中文&content=helloworld
+
 
 ### 谷歌
 
 #### 谷歌翻译
-  - 文件路径：`/google/api/translate`
-  - 请求地址：`域名/api?api=google_translate`
-  - 其他参数：
-    - from【必填】：源语言
-    - to【必填】：翻译语言
-    - content【必填】：翻译内容，长度不超过 4891
-  - 返回格式：JSON
-  - 请求示例：https://api.eurkon.vercel.app/api?api=google_translate&from=英语&to=中文&content=helloworld
+
+**接口地址：** /google/translate
+
+**描述：** 谷歌翻译
+
+**请求方式：** GET
+
+**请求参数说明：**
+
+| 字段名 | 字段说明 | 字段类型 | 默认值 | 是否必填 |
+| --- | --- | --- | --- | --- |
+| fr | 源语言 | string | 英语 | 否 |
+| to | 翻译语言 | string | 中文 | 否 |
+| content | 翻译内容 | string | Hello World | 否 |
+
+**请求示例：** https://api.eurkon.com/google/translate?fr=英语&to=中文&content=helloworld
+
 
 ### 微博
 
-#### 爬取微博热搜
-  - 文件路径：`/weibo/api/top`
-  - 请求地址：`域名/api?api=weibo_top`
-  - 其他参数：无
-  - 返回格式：JSON
-  - 请求示例：https://api.eurkon.vercel.app/api?api=weibo_top
+#### 微博热搜
+
+**接口地址：** /weibo/top
+
+**描述：** 爬取微博热搜
+
+**请求方式：** GET
+
+**请求参数说明：** 无
+
+**请求示例：** https://api.eurkon.com/weibo/top
 
 ### 工具
 
 #### 生成二维码
-  - 文件路径：`/tools/api/QRCode`
-  - 请求地址：`域名/api?api=tools_qrcode`
-  - 其他参数：content【必填】：二维码内容
-  - 返回格式：PNG
-  - 请求示例：https://api.eurkon.vercel.app/api?api=tools_qrcode&content=https://blog.eurkon.com/
 
-### 模块
+**接口地址：** /tools/qrcode
 
-#### 功能
-  - 文件路径：
-  - 请求地址：`域名/api?api=`
-  - 其他参数：
-  - 返回格式：
-  - 请求示例：
+**描述：** 重定向请求百度统计，解决跨域问题
+
+**请求方式：** GET
+
+**请求参数说明：**
+
+| 字段名 | 字段说明 | 字段类型 | 默认值 | 是否必填 |
+| --- | --- | --- | --- | --- |
+| content | 二维码内容 | string | Hello World | 否 |
+
+**请求示例：** https://api.eurkon.com/api?api=tools_qrcode&content=HelloWorld
+
+
+### 有道
+
+#### 有道翻译
+
+**接口地址：** /youdao/translate
+
+**描述：** 有道翻译
+
+**请求方式：** GET
+
+**请求参数说明：**
+
+| 字段名 | 字段说明 | 字段类型 | 默认值 | 是否必填 |
+| --- | --- | --- | --- | --- |
+| content | 翻译内容 | string | Hello World | 否 |
+
+**请求示例：** https://api.eurkon.com/youdao/translate?content=helloworld
+
 
 ## 常用 API
 
 ### 百度百科历史今日
-  - 请求地址：`https://baike.baidu.com/cms/home/eventsOnHistory/`month`.json`
-  - 请求参数：month【必填】
-  - 返回格式：JSON
-  - 请求示例：https://baike.baidu.com/cms/home/eventsOnHistory/01.json
+
+**接口地址：** https://baike.baidu.com/cms/home/eventsOnHistory/
+
+**描述：** 百度百科历史今日
+
+**请求方式：** GET
+
+**请求参数说明：**
+
+| 字段名 | 字段说明 | 字段类型 | 默认值 | 是否必填 |
+| --- | --- | --- | --- | --- |
+| month | 月份 | string | 无 | 是 |
+
+**请求示例：** https://baike.baidu.com/cms/home/eventsOnHistory/01.json
 
 ### IP、行政区编码、地址
-  - 请求地址：`https://pv.sohu.com/cityjson?ie=utf-8`
-  - 请求参数：无
-  - 返回格式：JSON
-  - 请求示例：https://pv.sohu.com/cityjson?ie=utf-8
+
+**接口地址：** https://pv.sohu.com/cityjson
+
+**描述：** 获取当前 IP 地址信息
+
+**请求方式：** GET
+
+**请求参数说明：** 无
+
+**请求示例：** https://pv.sohu.com/cityjson?ie=utf-8
 
 ### 地区、国家、天气、温度、湿度
-  - 请求地址：`https://wttr.in/`ip`?format="%l+\\+%c+\\+%t+\\+%h"`
-  - 请求参数：ip【可填】
-  - 返回格式：Text
-  - 请求示例：https://wttr.in/?format="%l+\\+%c+\\+%t+\\+%h"
+
+**接口地址：** https://wttr.in/ip
+
+**描述：** 获取当前 IP 地址和天气信息
+
+**请求方式：** GET
+
+**请求参数说明：**
+
+| 字段名 | 字段说明 | 字段类型 | 默认值 | 是否必填 |
+| --- | --- | --- | --- | --- |
+| format | 返回格式 | string | 无 | 否 |
+
+**请求示例：** https://wttr.in/ip?format="%l+\\+%c+\\+%t+\\+%h"
 
 ### 腾讯天气接口
-  - 请求地址：`https://wis.qq.com/weather/common?source=xw&weather_type=forecast_1h|forecast_24h|index|alarm|limit|tips&province=`province`&city=`city`&county=`county
-  - 请求参数：
-    - province【必填】：省份
-    - city【必填】：城市
-    - county【选填】：地区
-  - 返回格式：JSON
-  - 请求示例：https://wis.qq.com/weather/common?source=xw&weather_type=forecast_1h|forecast_24h|index|alarm|limit|tips&province=广东&city=广州&county=天河
+
+**接口地址：** https://wis.qq.com/weather/common
+
+**描述：** 获取当前 IP 地址和天气信息
+
+**请求方式：** GET
+
+**请求参数说明：**
+
+| 字段名 | 字段说明 | 字段类型 | 默认值 | 是否必填 |
+| --- | --- | --- | --- | --- |
+| source | 请求类型 pc/wx | string | 无 | 是 |
+| weather_type | 查询类型，多个用 &#124; 分隔<br>observe（当前天气）<br>forecast_1h<br>forecast_24h<br> index 穿衣，舒适度等<br>alarm（预警）<br>tips（天气介绍）<br>air（空气质量）<br>rise（日出）| string | 无 | 是 |
+| province | 省份 | string | 无 | 是 |
+| city | 城市 | string | 无 | 是 |
+| county | 县区 | string | 无 | 否 |
+| callback | 回调函数，不传直接返回 json | string | 无 | 否 |
+
+**请求示例：** https://wis.qq.com/weather/common?source=xw&weather_type=forecast_1h|forecast_24h|index|alarm|limit|tips&province=广东&city=广州&county=天河
 
 ### 豆瓣电影接口
-  - 请求地址：`https://movie.douban.com/j/search_subjects?`
-  - 请求参数：
-    - tag【必填】：标签
-    - type【选填】：类型
-    - sort【选填】：排序
-    - page_limit【选填】：返回个数
-    - page_start【选填】：开始索引
-  - 返回格式：JSON
-  - 请求示例：https://movie.douban.com/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=20&page_start=0
-  - 备注信息：参考链接填写参数 https://movie.douban.com/explore#!type=movie&tag=热门&sort=recommend&page_limit=20&page_start=0
 
-### API
-  - 请求地址：
-  - 请求参数：
-  - 返回格式：
-  - 请求示例：
+**接口地址：** https://movie.douban.com/j/search_subjects
+
+**描述：** 获取当前 IP 地址和天气信息
+
+**请求方式：** GET
+
+**请求参数说明：**
+
+参考页面：https://movie.douban.com/explore
+
+| 字段名 | 字段说明 | 字段类型 | 默认值 | 是否必填 |
+| --- | --- | --- | --- | --- |
+| tag | 标签 | string | 无 | 否 |
+| type | 类型 | string | movie | 否 |
+| sort | 排序 | string | recommend | 否 |
+| page_limit | 返回个数 | integer | 20 | 否 |
+| page_start | 开始索引 | integer | 0 | 否 |
+
+**请求示例：** https://movie.douban.com/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=20&page_start=0
 
 ## 常用 API 网站
 
